@@ -221,7 +221,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href='https://tendermint.com/'>Tendermint</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -1073,7 +1073,7 @@ case of an error.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6784:6846#L255">NumUnconfirmedTxs</a></h2>
+<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L264">NumUnconfirmedTxs</a></h2>
 
 <p>Get number of unconfirmed transactions.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/num_unconfirmed_txs'</span>
@@ -1241,7 +1241,7 @@ DeliverTx response.</p>
 
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2051:2109#L62">Tx</a></h2>
+<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2094:2152#L63">Tx</a></h2>
 
 <p>Tx allows you to query the transaction results. <code class="prettyprint">nil</code> could mean the
 transaction is in the mempool, invalidated, or was not sent in the first
@@ -1322,9 +1322,10 @@ place.</p>
 <li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
 </ul>
 
-<h2 id="txsearch"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=4764:4831#L159">TxSearch</a></h2>
+<h2 id="txsearch"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5148:5238#L164">TxSearch</a></h2>
 
-<p>TxSearch allows you to query for multiple transactions results.</p>
+<p>TxSearch allows you to query for multiple transactions results. It returns a
+list of transactions (maximum ?per_page entries) and the total count.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:46657/tx_search?query=</span><span class="se">\"</span><span class="s2">account.owner='Ivan'</span><span class="se">\"</span><span class="s2">&amp;prove=true"</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">q</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">tmquery</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"account.owner='Ivan'"</span><span class="p">)</span><span class="x">
@@ -1336,37 +1337,38 @@ place.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
 
 
-    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"Proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"aunts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"J3LHbizt806uKnABNLwG4l7gXCA="</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"iblMO/M1TnNtlAefJyNCeVhjAb0="</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"iVk3ryurVaEEhdeS0ohAJZ3wtB8="</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"5hqMkTeGqpct51ohX0lZLIdsn7Q="</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"afhsNxFnLlZgFDoyPpdQSe0bR8g="</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"RootHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F6541223AA46E428CB1070E9840D2C3DF3B6D776"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"Index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"tx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"tx_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="w">
+      </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"Proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"aunts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="s2">"J3LHbizt806uKnABNLwG4l7gXCA="</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"iblMO/M1TnNtlAefJyNCeVhjAb0="</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"iVk3ryurVaEEhdeS0ohAJZ3wtB8="</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"5hqMkTeGqpct51ohX0lZLIdsn7Q="</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"afhsNxFnLlZgFDoyPpdQSe0bR8g="</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"RootHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F6541223AA46E428CB1070E9840D2C3DF3B6D776"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"Index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"tx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"tx_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Returns transactions matching the given query.</p>
-
 <h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
@@ -1392,6 +1394,20 @@ place.</p>
 <td>false</td>
 <td>Include proofs of the transactions inclusion in the block</td>
 </tr>
+<tr>
+<td>page</td>
+<td>int</td>
+<td>1</td>
+<td>false</td>
+<td>Page number (1-based)</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>int</td>
+<td>30</td>
+<td>false</td>
+<td>Number of entries per page (max: 100)</td>
+</tr>
 </tbody></table>
 
 <h3 id="returns">Returns</h3>
@@ -1405,9 +1421,9 @@ place.</p>
 <li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
 </ul>
 
-<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6190:6249#L226">UnconfirmedTxs</a></h2>
+<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L232">UnconfirmedTxs</a></h2>
 
-<p>Get unconfirmed transactions including their number.</p>
+<p>Get unconfirmed transactions (maximum ?limit entries) including their number.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/unconfirmed_txs'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">UnconfirmedTxs</span><span class="p">()</span><span class="x">
@@ -1427,6 +1443,12 @@ place.</p>
     </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
 
 </span><span class="p">}</span><span class="w">
+
+</span><span class="err">###</span><span class="w"> </span><span class="err">Query</span><span class="w"> </span><span class="err">Parameters</span><span class="w">
+
+</span><span class="err">|</span><span class="w"> </span><span class="err">Parameter</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Type</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Default</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Required</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Description</span><span class="w">                          </span><span class="err">|</span><span class="w">
+</span><span class="err">|-----------+------+---------+----------+--------------------------------------|</span><span class="w">
+</span><span class="err">|</span><span class="w"> </span><span class="err">limit</span><span class="w">     </span><span class="err">|</span><span class="w"> </span><span class="err">int</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="mi">30</span><span class="w">      </span><span class="err">|</span><span class="w"> </span><span class="kc">false</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">Maximum</span><span class="w"> </span><span class="err">number</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">entries</span><span class="w"> </span><span class="err">(max</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="err">)</span><span class="w"> </span><span class="err">|</span><span class="w">
 </span></code></pre>
 <h2 id="unsafedialpeers"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L65">UnsafeDialPeers</a></h2>
 
