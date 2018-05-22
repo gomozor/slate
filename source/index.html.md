@@ -7,7 +7,7 @@ language_tabs:
 
 toc_footers:
   - <a href='https://tendermint.com/'>Tendermint</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 search: true
 ---
@@ -884,7 +884,7 @@ info, err := client.NetInfo()
 }
 ```
 
-## [NumUnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6784:6846#L255)
+## [NumUnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L264)
 Get number of unconfirmed transactions.
 
 ```shell
@@ -1055,7 +1055,7 @@ go func() {
 
 <aside class="notice">WebSocket only</aside>
 
-## [Tx](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2051:2109#L62)
+## [Tx](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2094:2152#L63)
 Tx allows you to query the transaction results. `nil` could mean the
 transaction is in the mempool, invalidated, or was not sent in the first
 place.
@@ -1120,8 +1120,9 @@ Returns a transaction matching the given transaction hash.
 - `height`: `int` - height of the block where this transaction was in
 - `hash`: `[]byte` - hash of the transaction
 
-## [TxSearch](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=4764:4831#L159)
-TxSearch allows you to query for multiple transactions results.
+## [TxSearch](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5148:5238#L164)
+TxSearch allows you to query for multiple transactions results. It returns a
+list of transactions (maximum ?per_page entries) and the total count.
 
 ```shell
 curl "localhost:46657/tx_search?query=\"account.owner='Ivan'\"&prove=true"
@@ -1139,37 +1140,38 @@ tx, err := client.TxSearch(q, true)
 {
 
 
-	"result": [
-	  {
-	    "proof": {
-	      "Proof": {
-	        "aunts": [
-	          "J3LHbizt806uKnABNLwG4l7gXCA=",
-	          "iblMO/M1TnNtlAefJyNCeVhjAb0=",
-	          "iVk3ryurVaEEhdeS0ohAJZ3wtB8=",
-	          "5hqMkTeGqpct51ohX0lZLIdsn7Q=",
-	          "afhsNxFnLlZgFDoyPpdQSe0bR8g="
-	        ]
-	      },
-	      "Data": "mvZHHa7HhZ4aRT0xMDA=",
-	      "RootHash": "F6541223AA46E428CB1070E9840D2C3DF3B6D776",
-	      "Total": 32,
-	      "Index": 31
-	    },
-	    "tx": "mvZHHa7HhZ4aRT0xMDA=",
-	    "tx_result": {},
-	    "index": 31,
-	    "height": 12,
-	    "hash": "2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"
+	  "jsonrpc": "2.0",
+	  "id": "",
+	  "result": {
+		   "txs": [
+	      {
+	        "proof": {
+	          "Proof": {
+	            "aunts": [
+	              "J3LHbizt806uKnABNLwG4l7gXCA=",
+	              "iblMO/M1TnNtlAefJyNCeVhjAb0=",
+	              "iVk3ryurVaEEhdeS0ohAJZ3wtB8=",
+	              "5hqMkTeGqpct51ohX0lZLIdsn7Q=",
+	              "afhsNxFnLlZgFDoyPpdQSe0bR8g="
+	            ]
+	          },
+	          "Data": "mvZHHa7HhZ4aRT0xMDA=",
+	          "RootHash": "F6541223AA46E428CB1070E9840D2C3DF3B6D776",
+	          "Total": 32,
+	          "Index": 31
+	        },
+	        "tx": "mvZHHa7HhZ4aRT0xMDA=",
+	        "tx_result": {},
+	        "index": 31,
+	        "height": 12,
+	        "hash": "2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"
+	      }
+	    ],
+	    "total_count": 1
 	  }
-	],
-	"id": "",
-	"jsonrpc": "2.0"
 
 }
 ```
-
-Returns transactions matching the given query.
 
 ### Query Parameters
 
@@ -1177,6 +1179,8 @@ Returns transactions matching the given query.
 |-----------+--------+---------+----------+-----------------------------------------------------------|
 | query     | string | ""      | true     | Query                                                     |
 | prove     | bool   | false   | false    | Include proofs of the transactions inclusion in the block |
+| page      | int    | 1       | false    | Page number (1-based)                                     |
+| per_page  | int    | 30      | false    | Number of entries per page (max: 100)                     |
 
 ### Returns
 
@@ -1187,8 +1191,8 @@ Returns transactions matching the given query.
 - `height`: `int` - height of the block where this transaction was in
 - `hash`: `[]byte` - hash of the transaction
 
-## [UnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6190:6249#L226)
-Get unconfirmed transactions including their number.
+## [UnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L232)
+Get unconfirmed transactions (maximum ?limit entries) including their number.
 
 ```shell
 curl 'localhost:46657/unconfirmed_txs'
@@ -1214,6 +1218,12 @@ result, err := client.UnconfirmedTxs()
 	"jsonrpc": "2.0"
 
 }
+
+### Query Parameters
+
+| Parameter | Type | Default | Required | Description                          |
+|-----------+------+---------+----------+--------------------------------------|
+| limit     | int  | 30      | false    | Maximum number of entries (max: 100) |
 ```
 
 ## [UnsafeDialPeers](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L65)
