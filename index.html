@@ -237,11 +237,11 @@
 <li>JSONRPC over websockets</li>
 </ul>
 
-<p>Tendermint RPC is build using <a href="a%20href=&quot;https://github.com/tendermint/tendermint/tree/master/rpc/lib&quot;&gt;https://github.com/tendermint/tendermint/tree/master/rpc/lib&lt;/a">our own RPC library</a>. Documentation and tests for that library could be found at <code class="prettyprint">tendermint/rpc/lib</code> directory.</p>
+<p>Tendermint RPC is built using <a href="a%20href=&quot;https://github.com/tendermint/tendermint/tree/master/rpc/lib&quot;&gt;https://github.com/tendermint/tendermint/tree/master/rpc/lib&lt;/a">our own RPC library</a>. Documentation and tests for that library could be found at <code class="prettyprint">tendermint/rpc/lib</code> directory.</p>
 
 <h2 id="configuration">Configuration</h2>
 
-<p>Set the <code class="prettyprint">laddr</code> config parameter under <code class="prettyprint">[rpc]</code> table in the <code class="prettyprint">$TMHOME/config.toml</code> file or the <code class="prettyprint">--rpc.laddr</code> command-line flag to the desired protocol://host:port setting.Default: <code class="prettyprint">tcp://0.0.0.0:46657</code>.</p>
+<p>Set the <code class="prettyprint">laddr</code> config parameter under <code class="prettyprint">[rpc]</code> table in the <code class="prettyprint">$TMHOME/config/config.toml</code> file or the <code class="prettyprint">--rpc.laddr</code> command-line flag to the desired protocol://host:port setting.  Default: <code class="prettyprint">tcp://0.0.0.0:46657</code>.</p>
 
 <h2 id="arguments">Arguments</h2>
 
@@ -254,15 +254,18 @@
 <p>Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>The first entry in the result-array (<code class="prettyprint">96</code>) is the method this response correlates with. <code class="prettyprint">96</code> refers to &ldquo;ResultTypeBroadcastTx&rdquo;, see <a href="a%20href=&quot;https://github.com/tendermint/tendermint/blob/master/rpc/core/types/responses.go&quot;&gt;https://github.com/tendermint/tendermint/blob/master/rpc/core/types/responses.go&lt;/a">responses.go</a> for a complete overview.</p>
@@ -271,15 +274,18 @@
 
 <p>JSONRPC requests can be POST&rsquo;d to the root RPC endpoint via HTTP (e.g. <code class="prettyprint">&lt;a href=&quot;http://localhost:46657/&quot;&gt;http://localhost:46657/&lt;/a&gt;</code>).</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"broadcast_tx_sync"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"abc"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dontcare"</span><span class="w">
+
+
+    </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"broadcast_tx_sync"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"abc"</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dontcare"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2 id="jsonrpc-websockets">JSONRPC/websockets</h2>
 
-<p>JSONRPC requests can be made via websocket. The websocket endpoint is at <code class="prettyprint">/websocket</code>, e.g. <code class="prettyprint">localhost:46657/websocket</code>.  Asynchronous RPC functions like event <code class="prettyprint">subscribe</code>and <code class="prettyprint">unsubscribe</code> are only available via websockets.</p>
+<p>JSONRPC requests can be made via websocket. The websocket endpoint is at <code class="prettyprint">/websocket</code>, e.g. <code class="prettyprint">localhost:46657/websocket</code>.  Asynchronous RPC functions like event <code class="prettyprint">subscribe</code> and <code class="prettyprint">unsubscribe</code> are only available via websockets.</p>
 
 <h2 id="more-examples">More Examples</h2>
 
@@ -300,6 +306,7 @@
 /net_info
 /num_unconfirmed_txs
 /status
+/health
 /unconfirmed_txs
 /unsafe_flush_mempool
 /unsafe_stop_cpu_profiler
@@ -314,6 +321,7 @@ Endpoints that require arguments:
 /broadcast_tx_sync?tx=_
 /commit?height=_
 /dial_seeds?seeds=_
+/dial_persistent_peers?persistent_peers=_
 /subscribe?event=_
 /tx?hash=_&amp;prove=_
 /unsafe_start_cpu_profiler?filename=_
@@ -322,7 +330,7 @@ Endpoints that require arguments:
 </code></pre>
 <h1 id="endpoints">Endpoints</h1>
 
-<h2 id="abciinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2212:2259#L78">ABCIInfo</a></h2>
+<h2 id="abciinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2427:2474#L79">ABCIInfo</a></h2>
 
 <p>Get some info about the application.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/abci_info'</span>
@@ -333,20 +341,23 @@ Endpoints that require arguments:
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:3}"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:3}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="abciquery"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1394:1483#L38">ABCIQuery</a></h2>
+<h2 id="abciquery"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1581:1688#L40">ABCIQuery</a></h2>
 
 <p>Query the application for some information.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/abci_query?path=""&amp;data="abcd"&amp;prove=true'</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/abci_query?path=""&amp;data="abcd"&amp;trusted=false'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">ABCIQuery</span><span class="p">(</span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="s">"abcd"</span><span class="p">,</span><span class="x"> </span><span class="no">true</span><span class="p">)</span><span class="x">
 </span></code></pre>
@@ -354,20 +365,23 @@ Endpoints that require arguments:
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exists"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="s2">"010114FED0DAD959F36091AD761C922ABA3CBF1D8349990101020103011406AA2262E2F448242DF2C2607C3CDC705313EE3B0001149D16177BC71E445476174622EA559715C293740C"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61626364"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61626364"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"exists"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="s2">"010114FED0DAD959F36091AD761C922ABA3CBF1D8349990101020103011406AA2262E2F448242DF2C2607C3CDC705313EE3B0001149D16177BC71E445476174622EA559715C293740C"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61626364"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61626364"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -396,17 +410,25 @@ Endpoints that require arguments:
 <td>Data</td>
 </tr>
 <tr>
-<td>prove</td>
+<td>height</td>
+<td>int64</td>
+<td>0</td>
+<td>false</td>
+<td>Height (0 means latest)</td>
+</tr>
+<tr>
+<td>trusted</td>
 <td>bool</td>
 <td>false</td>
 <td>false</td>
-<td>Include a proof of the data inclusion</td>
+<td>Does not include a proof of the data inclusion</td>
 </tr>
 </tbody></table>
 
-<h2 id="block"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5191:5242#L176">Block</a></h2>
+<h2 id="block"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5535:5592#L186">Block</a></h2>
 
-<p>Get block at a given height.</p>
+<p>Get block at a given height.
+If no height is provided, it will fetch the latest block.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/block?height=10'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
@@ -415,93 +437,128 @@ Endpoints that require arguments:
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"block"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"last_commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12C0D8893B8A38224488DC1DE6270DF76BB1A5E9DB1C68577706A6A97C6EC34FFD12339183D5CA8BC2F46148773823DE905B7F6F5862FD564038BB7AE03BF50D"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"block"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"last_commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12C0D8893B8A38224488DC1DE6270DF76BB1A5E9DB1C68577706A6A97C6EC34FFD12339183D5CA8BC2F46148773823DE905B7F6F5862FD564038BB7AE03BF50D"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"validator_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"validator_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"blockID"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
               </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"validator_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"validator_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"blockID"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
+          </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="s2">"block_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
+          </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
+        </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"block_meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="blockchaininfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1511:1594#L54">BlockchainInfo</a></h2>
+<h2 id="blockresults"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=9260:9331#L322">BlockResults</a></h2>
 
-<p>Get block headers for minHeight &lt;= height &lt;= maxHeight.</p>
+<p>BlockResults gets ABCIResults at a given height.
+If no height is provided, it will fetch results for the latest block.</p>
+
+<p>Results are for the height of the block containing the txs.
+Thus response.results[5] is the results of executing getBlock(h).Txs[5]</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/block_results?height=10'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BlockResults</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CAFE00F00D"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">102</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="blockchaininfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1625:1710#L56">BlockchainInfo</a></h2>
+
+<p>Get block headers for minHeight &lt;= height &lt;= maxHeight.
+Block headers are returned in descending order (highest first).</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/blockchain?minHeight=10&amp;maxHeight=10'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BlockchainInfo</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="x"> </span><span class="m">10</span><span class="p">)</span><span class="x">
@@ -510,45 +567,48 @@ Endpoints that require arguments:
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"block_metas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"last_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">5493</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"block_metas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:53.877Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3C78F00658E06744A88F24FF97A0A5011139F34A"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F70588DAB36BDA5A953D548A16F7D48C6C2DFD78"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F31CC4282E50B3F2A58D763D233D76F26D26CABE"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"last_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">5493</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <aside class="notice">Returns at most 20 items.</aside>
 
-<h2 id="broadcasttxasync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1140:1209#L38">BroadcastTxAsync</a></h2>
+<h2 id="broadcasttxasync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1177:1246#L41">BroadcastTxAsync</a></h2>
 
 <p>Returns right away, with no response</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_async?tx="123"'</span>
@@ -559,15 +619,18 @@ Endpoints that require arguments:
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E39AAB7A537ABAA237831742DCE1117F187C3C52"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E39AAB7A537ABAA237831742DCE1117F187C3C52"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -590,7 +653,7 @@ Endpoints that require arguments:
 </tr>
 </tbody></table>
 
-<h2 id="broadcasttxcommit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3642:3718#L139">BroadcastTxCommit</a></h2>
+<h2 id="broadcasttxcommit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3679:3755#L142">BroadcastTxCommit</a></h2>
 
 <p>CONTRACT: only returns error if mempool.BroadcastTx errs (ie. problem with the app)
 or if we timeout waiting for tx to commit.
@@ -604,23 +667,26 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">26682</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75CA0F856A4DA078FC4911580360E70CEFB2EBEE"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliver_tx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">26682</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75CA0F856A4DA078FC4911580360E70CEFB2EBEE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"deliver_tx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"check_tx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"check_tx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -643,7 +709,7 @@ will contain a non-OK ABCI code.</p>
 </tr>
 </tbody></table>
 
-<h2 id="broadcasttxsync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2133:2201#L78">BroadcastTxSync</a></h2>
+<h2 id="broadcasttxsync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2170:2238#L81">BroadcastTxSync</a></h2>
 
 <p>Returns with the response from CheckTx.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_sync?tx="456"'</span>
@@ -654,15 +720,18 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0D33F2F03A5234F38706E43004489E061AC40A2E"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
+
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0D33F2F03A5234F38706E43004489E061AC40A2E"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -685,9 +754,10 @@ will contain a non-OK ABCI code.</p>
 </tr>
 </tbody></table>
 
-<h2 id="commit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7571:7624#L258">Commit</a></h2>
+<h2 id="commit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7921:7980#L268">Commit</a></h2>
 
-<p>Get block commit at a given height.</p>
+<p>Get block commit at a given height.
+If no height is provided, it will fetch the commit for the latest block.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/commit?height=11'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Commit</span><span class="p">(</span><span class="m">11</span><span class="p">)</span><span class="x">
@@ -696,81 +766,230 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"canonical"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00970429FEC652E9E21D106A90AE8C5413759A7488775CEF4A3F44DC46C7F9D941070E4FBE9ED54DF247FA3983359A0C3A238D61DE55C75C9116D72ABC9CF50F"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"canonical"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00970429FEC652E9E21D106A90AE8C5413759A7488775CEF4A3F44DC46C7F9D941070E4FBE9ED54DF247FA3983359A0C3A238D61DE55C75C9116D72ABC9CF50F"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9E37CBF266BC044A779E09D81C456E653B89E006"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC6E861E31CA4334E9888381B4A9137D1458AB6A"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validator_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validator_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"blockID"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9E37CBF266BC044A779E09D81C456E653B89E006"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC6E861E31CA4334E9888381B4A9137D1458AB6A"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"validator_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"validator_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"blockID"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9E37CBF266BC044A779E09D81C456E653B89E006"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:54.893Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC6E861E31CA4334E9888381B4A9137D1458AB6A"</span><span class="w">
+        </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3CE0C9727CE524BA9CB7C91E28F08E2B94001087"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:54.893Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"num_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"last_block_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"parts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"277A4DBEF91483A18B85F2F5677ABF9694DFA40F"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"96B1D2F2D201BA4BC383EB8224139DB1294944E5"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"last_commit_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3CE0C9727CE524BA9CB7C91E28F08E2B94001087"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"data_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"validators_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9365FC80F234C967BD233F5A3E2AB2F1E4B0E5AA"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="dumpconsensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=2993:3060#L64">DumpConsensusState</a></h2>
+<h2 id="consensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=7002:7061#L247">ConsensusState</a></h2>
 
-<p>Dump consensus state.</p>
+<p>ConsensusState returns a concise summary of the consensus state.
+UNSTABLE</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/consensus_state'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">ConsensusState</span><span class="p">()</span><span class="x">
+</span></code></pre>
+<p>The above command returns JSON structured like this:</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"round_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"height/round/step"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9336/0/1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-14T10:25:45.72595357-04:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_block_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locked_block_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"valid_block_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height_vote_set"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"prevotes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"nil-Vote"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"prevotes_bit_array"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BA{1:_} 0/10 = 0.00"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"nil-Vote"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"precommits_bit_array"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BA{1:_} 0/10 = 0.00"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="dumpconsensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=5259:5326#L180">DumpConsensusState</a></h2>
+
+<p>DumpConsensusState dumps consensus state.
+UNSTABLE</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/dump_consensus_state'</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">DumpConsensusState</span><span class="p">()</span><span class="x">
 </span></code></pre>
-<blockquote>
 <p>The above command returns JSON structured like this:</p>
-</blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"peer_round_states"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="s2">"round_state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RoundState{</span><span class="se">\n</span><span class="s2">  H:3537 R:0 S:RoundStepNewHeight</span><span class="se">\n</span><span class="s2">  StartTime:     2017-05-31 12:32:31.178653883 +0000 UTC</span><span class="se">\n</span><span class="s2">  CommitTime:    2017-05-31 12:32:30.178653883 +0000 UTC</span><span class="se">\n</span><span class="s2">  Validators:    ValidatorSet{</span><span class="se">\n</span><span class="s2">      Proposer: Validator{E89A51D60F68385E09E716D353373B11F8FACD62 {PubKeyEd25519{68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D}} VP:10 A:0}</span><span class="se">\n</span><span class="s2">      Validators:</span><span class="se">\n</span><span class="s2">        Validator{E89A51D60F68385E09E716D353373B11F8FACD62 {PubKeyEd25519{68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D}} VP:10 A:0}</span><span class="se">\n</span><span class="s2">    }</span><span class="se">\n</span><span class="s2">  Proposal:      &lt;nil&gt;</span><span class="se">\n</span><span class="s2">  ProposalBlock: nil-PartSet nil-Block</span><span class="se">\n</span><span class="s2">  LockedRound:   0</span><span class="se">\n</span><span class="s2">  LockedBlock:   nil-PartSet nil-Block</span><span class="se">\n</span><span class="s2">  Votes:         HeightVoteSet{H:3537 R:0~0</span><span class="se">\n</span><span class="s2">      VoteSet{H:3537 R:0 T:1 +2/3:&lt;nil&gt; BA{1:_} map[]}</span><span class="se">\n</span><span class="s2">      VoteSet{H:3537 R:0 T:2 +2/3:&lt;nil&gt; BA{1:_} map[]}</span><span class="se">\n</span><span class="s2">    }</span><span class="se">\n</span><span class="s2">  LastCommit: VoteSet{H:3536 R:0 T:2 +2/3:B7F988FBCDC68F9320E346EECAA76E32F6054654:1:673BE7C01F74 BA{1:X} map[]}</span><span class="se">\n</span><span class="s2">  LastValidators:    ValidatorSet{</span><span class="se">\n</span><span class="s2">      Proposer: Validator{E89A51D60F68385E09E716D353373B11F8FACD62 {PubKeyEd25519{68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D}} VP:10 A:0}</span><span class="se">\n</span><span class="s2">      Validators:</span><span class="se">\n</span><span class="s2">        Validator{E89A51D60F68385E09E716D353373B11F8FACD62 {PubKeyEd25519{68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D}} VP:10 A:0}</span><span class="se">\n</span><span class="s2">    }</span><span class="se">\n</span><span class="s2">}"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"round_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">7185</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-12T13:57:28.440293621-07:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"commit_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-12T13:57:27.440293621-07:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B5B3D40BE53982AD294EF99FF5A34C0C3E5A3244"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AC26791624DE60"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SBctdhRBcXtBgdI/8a/alTsUhGXqGs9k5ylV1u5iKHg="</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"proposer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B5B3D40BE53982AD294EF99FF5A34C0C3E5A3244"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AC26791624DE60"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SBctdhRBcXtBgdI/8a/alTsUhGXqGs9k5ylV1u5iKHg="</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"proposal_block_parts"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locked_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locked_block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locked_block_parts"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"valid_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"valid_block"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"valid_block_parts"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"votes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"prevotes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"commit_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"votes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Vote{0:B5B3D40BE539 7184/00/2(Precommit) 14F946FA7EF0 /702B1B1A602A.../ @ 2018-05-12T20:57:27.342Z}"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"votes_bit_array"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"peer_maj_23s"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"last_validators"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B5B3D40BE53982AD294EF99FF5A34C0C3E5A3244"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AC26791624DE60"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SBctdhRBcXtBgdI/8a/alTsUhGXqGs9k5ylV1u5iKHg="</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"proposer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B5B3D40BE53982AD294EF99FF5A34C0C3E5A3244"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AC26791624DE60"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SBctdhRBcXtBgdI/8a/alTsUhGXqGs9k5ylV1u5iKHg="</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"node_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30ad1854af22506383c3f0e57fb3c7f90984c5e8@172.16.63.221:46656"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"peer_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"round_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">7185</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-05-12T13:57:27.438039872-07:00"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"proposal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"proposal_block_parts_header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="s2">"proposal_block_parts"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"proposal_pol_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"proposal_pol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"prevotes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"precommits"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"last_commit_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"last_commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"catchup_commit_round"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"catchup_commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"last_vote_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">7184</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"votes"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"last_block_part_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">7184</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"block_parts"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="genesis"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=2354:2399#L98">Genesis</a></h2>
+<h2 id="genesis"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=3065:3110#L115">Genesis</a></h2>
 
 <p>Get genesis file.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/genesis'</span>
@@ -781,29 +1000,53 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"genesis"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"genesis"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"genesis_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:41.671Z"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"chain_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"genesis_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T15:05:41.671Z"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="netinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=558:603#L26">NetInfo</a></h2>
+<h2 id="health"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/health.go?s=519:562#L19">Health</a></h2>
+
+<p>Get node health. Returns empty result (200 OK) on success, no response - in
+case of an error.</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/health'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Health</span><span class="p">()</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="netinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=594:639#L27">NetInfo</a></h2>
 
 <p>Get network info.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/net_info'</span>
@@ -814,19 +1057,23 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="s2">"listeners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"Listener(@10.0.2.15:46656)"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"listening"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"n_peers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"listeners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Listener(@10.0.2.15:46656)"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"listening"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6525:6587#L250">NumUnconfirmedTxs</a></h2>
+<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6784:6846#L255">NumUnconfirmedTxs</a></h2>
 
 <p>Get number of unconfirmed transactions.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/num_unconfirmed_txs'</span>
@@ -837,16 +1084,19 @@ will contain a non-OK ABCI code.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"n_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"n_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="status"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1544:1587#L46">Status</a></h2>
+<h2 id="status"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1719:1762#L56">Status</a></h2>
 
 <p>Get Tendermint status including node info, pubkey, latest block
 hash, app hash, block height and time.</p>
@@ -858,53 +1108,115 @@ hash, app hash, block height and time.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"latest_block_time"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.49631773695e+18</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latest_block_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">22924</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latest_app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9D16177BC71E445476174622EA559715C293740C"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"latest_block_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75B36EEF96C277A592D8B14867098C58F68BB180"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"node_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"other"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"wire_version=0.6.2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"p2p_version=0.5.0"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"consensus_version=v1/0.2.2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"rpc_version=0.7.0/3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tx_index=on"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"rpc_addr=tcp://0.0.0.0:46657"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10.0-rc1-aa22bd84"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"listen_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0.2.15:46656"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"remote_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-6UTNIN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"moniker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anonymous"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"659B9E54DD6EF9FEF28FAD40629AF0E4BD3C2563BB037132B054A176E00F1D94"</span><span class="w">
+
+
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"node_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"562dd7f579f0ecee8c94a11a3c1e378c1876f433"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"listen_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.2:46656"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-I6zScH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.19.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4020212223303800"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"moniker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ethans-MacBook-Pro.local"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"other"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"amino_version=0.9.8"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"p2p_version=0.5.0"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"consensus_version=v1/0.2.2"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"rpc_version=0.7.0/3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"tx_index=on"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"rpc_addr=tcp://0.0.0.0:46657"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"sync_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"latest_block_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2D4D7055BE685E3CB2410603C92AD37AE557AC59"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"latest_app_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"latest_block_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">231</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"latest_block_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-27T23:18:08.459766485-04:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"syncing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"validator_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5875562FF0FFDECC895C20E32FC14988952E99E7"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AC26791624DE60"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PpDJRUrLG2RgFqYYjawfn/AcAgacSXpLFrmfYYQnuzE="</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="subscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=853:943#L26">Subscribe</a></h2>
+<h2 id="subscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2772:2862#L77">Subscribe</a></h2>
 
 <p>Subscribe for events via WebSocket.</p>
-<pre class="highlight go tab-go"><code><span class="k">import</span><span class="x"> </span><span class="err">'</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tendermint</span><span class="o">/</span><span class="n">tendermint</span><span class="o">/</span><span class="n">types</span><span class="err">'</span><span class="x">
+
+<p>To tell which events you want, you need to provide a query. query is a
+string, which has a form: &ldquo;condition AND condition &hellip;&rdquo; (no OR at the
+moment). condition has a form: &ldquo;key operation operand&rdquo;. key is a string with
+a restricted set of possible symbols ( \t\n\r\()&ldquo;&lsquo;=&gt;&lt; are not allowed).
+operation can be &rdquo;=&ldquo;, &rdquo;&lt;&ldquo;, &rdquo;&lt;=&ldquo;, &rdquo;&gt;&ldquo;, &rdquo;&gt;=&ldquo;, &quot;CONTAINS&rdquo;. operand can be a
+string (escaped with single quotes), number, date or time.</p>
+
+<p>Examples:</p>
+
+<p>tm.event = &#39;NewBlock&rsquo;                               # new blocks
+    tm.event = &lsquo;CompleteProposal&rsquo;               # node got a complete proposal
+    tm.event = &lsquo;Tx&rsquo; AND tx.hash = &lsquo;XYZ&rsquo; # single transaction
+    tm.event = &lsquo;Tx&rsquo; AND tx.height = 5       # all txs of the fifth block
+    tx.height = 5                                               # all txs of the fifth block</p>
+
+<p>Tendermint provides a few predefined keys: tm.event, tx.hash and tx.height.
+Note for transactions, you can define additional keys by providing tags with
+DeliverTx response.</p>
+
+<p>DeliverTx{
+            Tags: []*KVPair{
+                &ldquo;agent.name&rdquo;: &ldquo;K&rdquo;,
+            }
+      }</p>
+
+<p>tm.event = &lsquo;Tx&rsquo; AND agent.name = &lsquo;K&rsquo;
+        tm.event = &lsquo;Tx&rsquo; AND account.created_at &gt;= TIME 2013-05-03T14:45:00Z
+        tm.event = &lsquo;Tx&rsquo; AND contract.sign_date = DATE 2017-01-01
+        tm.event = &lsquo;Tx&rsquo; AND account.owner CONTAINS &lsquo;Igor&rsquo;</p>
+
+<p>See list of all possible events here
+<a href="https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants">https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants</a></p>
+
+<p>For complete query syntax, check out
+<a href="https://godoc.org/github.com/tendermint/tmlibs/pubsub/query">https://godoc.org/github.com/tendermint/tmlibs/pubsub/query</a>.</p>
+<pre class="highlight go tab-go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/tendermint/tmlibs/pubsub/query"</span><span class="x">
+</span><span class="k">import</span><span class="x"> </span><span class="s">"github.com/tendermint/tendermint/types"</span><span class="x">
 
 </span><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
-</span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">AddListenerForEvent</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">EventStringNewBlock</span><span class="p">())</span><span class="x">
+</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="n">cancel</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">WithTimeout</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">(),</span><span class="x"> </span><span class="n">timeout</span><span class="p">)</span><span class="x">
+</span><span class="k">defer</span><span class="x"> </span><span class="n">cancel</span><span class="p">()</span><span class="x">
+</span><span class="n">query</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">query</span><span class="o">.</span><span class="n">MustParse</span><span class="p">(</span><span class="s">"tm.event = 'Tx' AND tx.height = 3"</span><span class="p">)</span><span class="x">
+</span><span class="n">txs</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="k">interface</span><span class="p">{})</span><span class="x">
+</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="s">"test-client"</span><span class="p">,</span><span class="x"> </span><span class="n">query</span><span class="p">,</span><span class="x"> </span><span class="n">txs</span><span class="p">)</span><span class="x">
+
+</span><span class="k">go</span><span class="x"> </span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+
+
+      </span><span class="k">for</span><span class="x"> </span><span class="n">e</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">txs</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"got "</span><span class="p">,</span><span class="x"> </span><span class="n">e</span><span class="o">.</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">EventDataTx</span><span class="p">))</span><span class="x">
+         </span><span class="p">}</span><span class="x">
+
+</span><span class="p">}()</span><span class="x">
 </span></code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -919,20 +1231,20 @@ hash, app hash, block height and time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>event</td>
+<td>query</td>
 <td>string</td>
 <td>&ldquo;&rdquo;</td>
 <td>true</td>
-<td>Event name</td>
+<td>Query</td>
 </tr>
 </tbody></table>
 
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=1894:1952#L59">Tx</a></h2>
+<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2051:2109#L62">Tx</a></h2>
 
 <p>Tx allows you to query the transaction results. <code class="prettyprint">nil</code> could mean the
-transaction is in the mempool, invalidated, or was not send in the first
+transaction is in the mempool, invalidated, or was not sent in the first
 place.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:46657/tx?hash=0x2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span>
 </code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
@@ -942,28 +1254,32 @@ place.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"aunts"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YWJjZA=="</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"RootHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"aunts"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YWJjZA=="</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RootHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"tx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YWJjZA=="</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tx_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"tx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YWJjZA=="</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"tx_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Returns a transaction matching the given transaction hash.</p>
@@ -1003,9 +1319,93 @@ place.</p>
 <li><code class="prettyprint">tx_result</code>: the <code class="prettyprint">abci.Result</code> object</li>
 <li><code class="prettyprint">index</code>: <code class="prettyprint">int</code> - index of the transaction</li>
 <li><code class="prettyprint">height</code>: <code class="prettyprint">int</code> - height of the block where this transaction was in</li>
+<li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
 </ul>
 
-<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=5938:5997#L222">UnconfirmedTxs</a></h2>
+<h2 id="txsearch"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=4764:4831#L159">TxSearch</a></h2>
+
+<p>TxSearch allows you to query for multiple transactions results.</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:46657/tx_search?query=</span><span class="se">\"</span><span class="s2">account.owner='Ivan'</span><span class="se">\"</span><span class="s2">&amp;prove=true"</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">q</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">tmquery</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"account.owner='Ivan'"</span><span class="p">)</span><span class="x">
+</span><span class="n">tx</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">TxSearch</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="x"> </span><span class="no">true</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"Proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"aunts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"J3LHbizt806uKnABNLwG4l7gXCA="</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"iblMO/M1TnNtlAefJyNCeVhjAb0="</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"iVk3ryurVaEEhdeS0ohAJZ3wtB8="</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"5hqMkTeGqpct51ohX0lZLIdsn7Q="</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"afhsNxFnLlZgFDoyPpdQSe0bR8g="</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"Data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"RootHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F6541223AA46E428CB1070E9840D2C3DF3B6D776"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Total"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"tx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mvZHHa7HhZ4aRT0xMDA="</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tx_result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Returns transactions matching the given query.</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>&ldquo;&rdquo;</td>
+<td>true</td>
+<td>Query</td>
+</tr>
+<tr>
+<td>prove</td>
+<td>bool</td>
+<td>false</td>
+<td>false</td>
+<td>Include proofs of the transactions inclusion in the block</td>
+</tr>
+</tbody></table>
+
+<h3 id="returns">Returns</h3>
+
+<ul>
+<li><code class="prettyprint">proof</code>: the <code class="prettyprint">types.TxProof</code> object</li>
+<li><code class="prettyprint">tx</code>: <code class="prettyprint">[]byte</code> - the transaction</li>
+<li><code class="prettyprint">tx_result</code>: the <code class="prettyprint">abci.Result</code> object</li>
+<li><code class="prettyprint">index</code>: <code class="prettyprint">int</code> - index of the transaction</li>
+<li><code class="prettyprint">height</code>: <code class="prettyprint">int</code> - height of the block where this transaction was in</li>
+<li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
+</ul>
+
+<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6190:6249#L226">UnconfirmedTxs</a></h2>
 
 <p>Get unconfirmed transactions including their number.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/unconfirmed_txs'</span>
@@ -1016,33 +1416,39 @@ place.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="s2">"n_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"txs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"n_txs"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="unsafedialseeds"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1129:1198#L47">UnsafeDialSeeds</a></h2>
+<h2 id="unsafedialpeers"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L65">UnsafeDialPeers</a></h2>
 
-<h2 id="unsubscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2132:2226#L64">Unsubscribe</a></h2>
+<h2 id="unsafedialseeds"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1279:1348#L52">UnsafeDialSeeds</a></h2>
+
+<h2 id="unsubscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=4164:4258#L129">Unsubscribe</a></h2>
 
 <p>Unsubscribe from events via WebSocket.</p>
-<pre class="highlight go tab-go"><code><span class="k">import</span><span class="x"> </span><span class="err">'</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tendermint</span><span class="o">/</span><span class="n">tendermint</span><span class="o">/</span><span class="n">types</span><span class="err">'</span><span class="x">
-
-</span><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
-</span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">RemoveListenerForEvent</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">EventStringNewBlock</span><span class="p">())</span><span class="x">
+<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Unsubscribe</span><span class="p">(</span><span class="s">"test-client"</span><span class="p">,</span><span class="x"> </span><span class="n">query</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3 id="query-parameters">Query Parameters</h3>
@@ -1057,46 +1463,71 @@ place.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>event</td>
+<td>query</td>
 <td>string</td>
 <td>&ldquo;&rdquo;</td>
 <td>true</td>
-<td>Event name</td>
+<td>Query</td>
 </tr>
 </tbody></table>
 
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="validators"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1056:1107#L35">Validators</a></h2>
+<h2 id="unsubscribeall"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=5010:5093#L162">UnsubscribeAll</a></h2>
 
-<p>Get current validators set along with a block height.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/validators'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
-</span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Validators</span><span class="p">()</span><span class="x">
+<p>Unsubscribe from all events via WebSocket.</p>
+<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">UnsubscribeAll</span><span class="p">(</span><span class="s">"test-client"</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"block_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">5241</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<aside class="notice">WebSocket only</aside>
+
+<h2 id="validators"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1045:1112#L36">Validators</a></h2>
+
+<p>Get the validator set at the given block height.
+If no height is provided, it will fetch the current validator set.</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/validators'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Validators</span><span class="p">()</span><span class="x">
+</span></code></pre>
+<p>The above command returns JSON structured like this:</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"validators"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"accum"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"voting_power"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"pub_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"68DFDA7E50F82946E7E8546BED37944A422CD1B831E70DF66BA3B8430593944D"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ed25519"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E89A51D60F68385E09E716D353373B11F8FACD62"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"block_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">5241</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<hr>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
