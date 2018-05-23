@@ -31,6 +31,12 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: set github creds
+          command: |
+             git config --global user.email "github@tendermint.com"
+             git config --global user.name "tenderbot"
         
       - run:
           name: deploy
