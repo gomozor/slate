@@ -241,14 +241,14 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>Set the <code class="prettyprint">laddr</code> config parameter under <code class="prettyprint">[rpc]</code> table in the <code class="prettyprint">$TMHOME/config/config.toml</code> file or the <code class="prettyprint">--rpc.laddr</code> command-line flag to the desired protocol://host:port setting.  Default: <code class="prettyprint">tcp://0.0.0.0:46657</code>.</p>
+<p>Set the <code class="prettyprint">laddr</code> config parameter under <code class="prettyprint">[rpc]</code> table in the <code class="prettyprint">$TMHOME/config/config.toml</code> file or the <code class="prettyprint">--rpc.laddr</code> command-line flag to the desired protocol://host:port setting.  Default: <code class="prettyprint">tcp://0.0.0.0:26657</code>.</p>
 
 <h2 id="arguments">Arguments</h2>
 
 <p>Arguments which expect strings or byte arrays may be passed as quoted strings, like <code class="prettyprint">&quot;abc&quot;</code> or as <code class="prettyprint">0x</code>-prefixed strings, like <code class="prettyprint">0x616263</code>.</p>
 
 <h2 id="uri-http">URI/HTTP</h2>
-<pre class="highlight shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_sync?tx="abc"'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'localhost:26657/broadcast_tx_sync?tx="abc"'</span>
 </code></pre>
 <blockquote>
 <p>Response:</p>
@@ -272,7 +272,7 @@
 
 <h2 id="jsonrpc-http">JSONRPC/HTTP</h2>
 
-<p>JSONRPC requests can be POST&rsquo;d to the root RPC endpoint via HTTP (e.g. <code class="prettyprint">&lt;a href=&quot;http://localhost:46657/&quot;&gt;http://localhost:46657/&lt;/a&gt;</code>).</p>
+<p>JSONRPC requests can be POST&rsquo;d to the root RPC endpoint via HTTP (e.g. <code class="prettyprint">&lt;a href=&quot;http://localhost:26657/&quot;&gt;http://localhost:26657/&lt;/a&gt;</code>).</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
 
 
@@ -285,7 +285,7 @@
 </span></code></pre>
 <h2 id="jsonrpc-websockets">JSONRPC/websockets</h2>
 
-<p>JSONRPC requests can be made via websocket. The websocket endpoint is at <code class="prettyprint">/websocket</code>, e.g. <code class="prettyprint">localhost:46657/websocket</code>.  Asynchronous RPC functions like event <code class="prettyprint">subscribe</code> and <code class="prettyprint">unsubscribe</code> are only available via websockets.</p>
+<p>JSONRPC requests can be made via websocket. The websocket endpoint is at <code class="prettyprint">/websocket</code>, e.g. <code class="prettyprint">localhost:26657/websocket</code>.  Asynchronous RPC functions like event <code class="prettyprint">subscribe</code> and <code class="prettyprint">unsubscribe</code> are only available via websockets.</p>
 
 <h2 id="more-examples">More Examples</h2>
 
@@ -294,7 +294,7 @@
 <h2 id="get-the-list">Get the list</h2>
 
 <p>An HTTP Get request to the root RPC endpoint shows a list of available endpoints.</p>
-<pre class="highlight shell"><code>curl <span class="s1">'localhost:46657'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'localhost:26657'</span>
 </code></pre>
 <blockquote>
 <p>Response:</p>
@@ -330,11 +330,11 @@ Endpoints that require arguments:
 </code></pre>
 <h1 id="endpoints">Endpoints</h1>
 
-<h2 id="abciinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2427:2474#L79">ABCIInfo</a></h2>
+<h2 id="abciinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2427:2474#L89">ABCIInfo</a></h2>
 
 <p>Get some info about the application.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/abci_info'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/abci_info'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">ABCIInfo</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -354,11 +354,11 @@ Endpoints that require arguments:
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="abciquery"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1581:1688#L40">ABCIQuery</a></h2>
+<h2 id="abciquery"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1581:1688#L50">ABCIQuery</a></h2>
 
 <p>Query the application for some information.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/abci_query?path=""&amp;data="abcd"&amp;trusted=false'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/abci_query?path=""&amp;data="abcd"&amp;trusted=false'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">ABCIQuery</span><span class="p">(</span><span class="s">""</span><span class="p">,</span><span class="x"> </span><span class="s">"abcd"</span><span class="p">,</span><span class="x"> </span><span class="no">true</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -425,12 +425,12 @@ Endpoints that require arguments:
 </tr>
 </tbody></table>
 
-<h2 id="block"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5535:5592#L186">Block</a></h2>
+<h2 id="block"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5535:5592#L196">Block</a></h2>
 
 <p>Get block at a given height.
 If no height is provided, it will fetch the latest block.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/block?height=10'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/block?height=10'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Block</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -524,15 +524,15 @@ If no height is provided, it will fetch the latest block.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="blockresults"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=9260:9331#L322">BlockResults</a></h2>
+<h2 id="blockresults"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=9260:9331#L332">BlockResults</a></h2>
 
 <p>BlockResults gets ABCIResults at a given height.
 If no height is provided, it will fetch results for the latest block.</p>
 
 <p>Results are for the height of the block containing the txs.
 Thus response.results[5] is the results of executing getBlock(h).Txs[5]</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/block_results?height=10'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/block_results?height=10'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BlockResults</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -555,12 +555,12 @@ Thus response.results[5] is the results of executing getBlock(h).Txs[5]</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="blockchaininfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1625:1710#L56">BlockchainInfo</a></h2>
+<h2 id="blockchaininfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1625:1710#L66">BlockchainInfo</a></h2>
 
 <p>Get block headers for minHeight &lt;= height &lt;= maxHeight.
 Block headers are returned in descending order (highest first).</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/blockchain?minHeight=10&amp;maxHeight=10'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/blockchain?minHeight=10&amp;maxHeight=10'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BlockchainInfo</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="x"> </span><span class="m">10</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -608,11 +608,11 @@ Block headers are returned in descending order (highest first).</p>
 </span></code></pre>
 <aside class="notice">Returns at most 20 items.</aside>
 
-<h2 id="broadcasttxasync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1177:1246#L41">BroadcastTxAsync</a></h2>
+<h2 id="broadcasttxasync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1177:1246#L51">BroadcastTxAsync</a></h2>
 
 <p>Returns right away, with no response</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_async?tx="123"'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/broadcast_tx_async?tx="123"'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BroadcastTxAsync</span><span class="p">(</span><span class="s">"123"</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -653,14 +653,14 @@ Block headers are returned in descending order (highest first).</p>
 </tr>
 </tbody></table>
 
-<h2 id="broadcasttxcommit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3679:3755#L142">BroadcastTxCommit</a></h2>
+<h2 id="broadcasttxcommit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3679:3755#L152">BroadcastTxCommit</a></h2>
 
 <p>CONTRACT: only returns error if mempool.BroadcastTx errs (ie. problem with the app)
 or if we timeout waiting for tx to commit.
 If CheckTx or DeliverTx fail, no error will be returned, but the returned result
 will contain a non-OK ABCI code.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_commit?tx="789"'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/broadcast_tx_commit?tx="789"'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BroadcastTxCommit</span><span class="p">(</span><span class="s">"789"</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -709,11 +709,11 @@ will contain a non-OK ABCI code.</p>
 </tr>
 </tbody></table>
 
-<h2 id="broadcasttxsync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2170:2238#L81">BroadcastTxSync</a></h2>
+<h2 id="broadcasttxsync"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2170:2238#L91">BroadcastTxSync</a></h2>
 
 <p>Returns with the response from CheckTx.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/broadcast_tx_sync?tx="456"'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/broadcast_tx_sync?tx="456"'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">BroadcastTxSync</span><span class="p">(</span><span class="s">"456"</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -754,12 +754,12 @@ will contain a non-OK ABCI code.</p>
 </tr>
 </tbody></table>
 
-<h2 id="commit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7921:7980#L268">Commit</a></h2>
+<h2 id="commit"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7921:7980#L278">Commit</a></h2>
 
 <p>Get block commit at a given height.
 If no height is provided, it will fetch the commit for the latest block.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/commit?height=11'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/commit?height=11'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Commit</span><span class="p">(</span><span class="m">11</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -823,12 +823,12 @@ If no height is provided, it will fetch the commit for the latest block.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="consensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=7002:7061#L247">ConsensusState</a></h2>
+<h2 id="consensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=7002:7061#L257">ConsensusState</a></h2>
 
 <p>ConsensusState returns a concise summary of the consensus state.
 UNSTABLE</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/consensus_state'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/consensus_state'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">ConsensusState</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <p>The above command returns JSON structured like this:</p>
@@ -862,12 +862,12 @@ UNSTABLE</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="dumpconsensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=5259:5326#L180">DumpConsensusState</a></h2>
+<h2 id="dumpconsensusstate"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=5259:5326#L190">DumpConsensusState</a></h2>
 
 <p>DumpConsensusState dumps consensus state.
 UNSTABLE</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/dump_consensus_state'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/dump_consensus_state'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">DumpConsensusState</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <p>The above command returns JSON structured like this:</p>
@@ -954,7 +954,7 @@ UNSTABLE</p>
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"node_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30ad1854af22506383c3f0e57fb3c7f90984c5e8@172.16.63.221:46656"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"node_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30ad1854af22506383c3f0e57fb3c7f90984c5e8@172.16.63.221:26656"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"peer_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"round_state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">7185</span><span class="p">,</span><span class="w">
@@ -989,11 +989,11 @@ UNSTABLE</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="genesis"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=3065:3110#L115">Genesis</a></h2>
+<h2 id="genesis"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=3065:3110#L125">Genesis</a></h2>
 
 <p>Get genesis file.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/genesis'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/genesis'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">genesis</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Genesis</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1025,12 +1025,12 @@ UNSTABLE</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="health"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/health.go?s=519:562#L19">Health</a></h2>
+<h2 id="health"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/health.go?s=519:562#L29">Health</a></h2>
 
 <p>Get node health. Returns empty result (200 OK) on success, no response - in
 case of an error.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/health'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/health'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Health</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1046,11 +1046,11 @@ case of an error.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="netinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=594:639#L27">NetInfo</a></h2>
+<h2 id="netinfo"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=594:639#L37">NetInfo</a></h2>
 
 <p>Get network info.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/net_info'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/net_info'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">info</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NetInfo</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1064,7 +1064,7 @@ case of an error.</p>
         </span><span class="s2">"n_peers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
         </span><span class="s2">"listeners"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"Listener(@10.0.2.15:46656)"</span><span class="w">
+            </span><span class="s2">"Listener(@10.0.2.15:26656)"</span><span class="w">
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"listening"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1073,11 +1073,11 @@ case of an error.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L264">NumUnconfirmedTxs</a></h2>
+<h2 id="numunconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L274">NumUnconfirmedTxs</a></h2>
 
 <p>Get number of unconfirmed transactions.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/num_unconfirmed_txs'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/num_unconfirmed_txs'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">UnconfirmedTxs</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1096,12 +1096,12 @@ case of an error.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="status"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1719:1762#L56">Status</a></h2>
+<h2 id="status"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1719:1762#L66">Status</a></h2>
 
 <p>Get Tendermint status including node info, pubkey, latest block
 hash, app hash, block height and time.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/status'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/status'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Status</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1115,7 +1115,7 @@ hash, app hash, block height and time.</p>
     </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"node_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"562dd7f579f0ecee8c94a11a3c1e378c1876f433"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"listen_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.2:46656"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"listen_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.2:26656"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-chain-I6zScH"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.19.0"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"channels"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4020212223303800"</span><span class="p">,</span><span class="w">
@@ -1126,7 +1126,7 @@ hash, app hash, block height and time.</p>
           </span><span class="s2">"consensus_version=v1/0.2.2"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"rpc_version=0.7.0/3"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"tx_index=on"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"rpc_addr=tcp://0.0.0.0:46657"</span><span class="w">
+          </span><span class="s2">"rpc_addr=tcp://0.0.0.0:26657"</span><span class="w">
         </span><span class="p">]</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="s2">"sync_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1148,7 +1148,7 @@ hash, app hash, block height and time.</p>
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="subscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2772:2862#L77">Subscribe</a></h2>
+<h2 id="subscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2799:2889#L87">Subscribe</a></h2>
 
 <p>Subscribe for events via WebSocket.</p>
 
@@ -1186,11 +1186,11 @@ DeliverTx response.</p>
 <a href="https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants">https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants</a></p>
 
 <p>For complete query syntax, check out
-<a href="https://godoc.org/github.com/tendermint/tmlibs/pubsub/query">https://godoc.org/github.com/tendermint/tmlibs/pubsub/query</a>.</p>
-<pre class="highlight go tab-go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/tendermint/tmlibs/pubsub/query"</span><span class="x">
+<a href="https://godoc.org/github.com/tendermint/tendermint/libs/pubsub/query">https://godoc.org/github.com/tendermint/tendermint/libs/pubsub/query</a>.</p>
+<pre class="highlight go tab-go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/tendermint/tendermint/libs/pubsub/query"</span><span class="x">
 </span><span class="k">import</span><span class="x"> </span><span class="s">"github.com/tendermint/tendermint/types"</span><span class="x">
 
-</span><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+</span><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="n">cancel</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">WithTimeout</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">(),</span><span class="x"> </span><span class="n">timeout</span><span class="p">)</span><span class="x">
 </span><span class="k">defer</span><span class="x"> </span><span class="n">cancel</span><span class="p">()</span><span class="x">
 </span><span class="n">query</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">query</span><span class="o">.</span><span class="n">MustParse</span><span class="p">(</span><span class="s">"tm.event = 'Tx' AND tx.height = 3"</span><span class="p">)</span><span class="x">
@@ -1241,13 +1241,13 @@ DeliverTx response.</p>
 
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2094:2152#L63">Tx</a></h2>
+<h2 id="tx"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2104:2162#L74">Tx</a></h2>
 
 <p>Tx allows you to query the transaction results. <code class="prettyprint">nil</code> could mean the
 transaction is in the mempool, invalidated, or was not sent in the first
 place.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:46657/tx?hash=0x2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:26657/tx?hash=0x2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">tx</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Tx</span><span class="p">([]</span><span class="kt">byte</span><span class="p">(</span><span class="s">"2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"</span><span class="p">),</span><span class="x"> </span><span class="no">true</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1322,12 +1322,12 @@ place.</p>
 <li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
 </ul>
 
-<h2 id="txsearch"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5148:5238#L164">TxSearch</a></h2>
+<h2 id="txsearch"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5158:5248#L175">TxSearch</a></h2>
 
 <p>TxSearch allows you to query for multiple transactions results. It returns a
 list of transactions (maximum ?per_page entries) and the total count.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:46657/tx_search?query=</span><span class="se">\"</span><span class="s2">account.owner='Ivan'</span><span class="se">\"</span><span class="s2">&amp;prove=true"</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"localhost:26657/tx_search?query=</span><span class="se">\"</span><span class="s2">account.owner='Ivan'</span><span class="se">\"</span><span class="s2">&amp;prove=true"</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">q</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">tmquery</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"account.owner='Ivan'"</span><span class="p">)</span><span class="x">
 </span><span class="n">tx</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">TxSearch</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="x"> </span><span class="no">true</span><span class="p">)</span><span class="x">
 </span></code></pre>
@@ -1421,11 +1421,11 @@ list of transactions (maximum ?per_page entries) and the total count.</p>
 <li><code class="prettyprint">hash</code>: <code class="prettyprint">[]byte</code> - hash of the transaction</li>
 </ul>
 
-<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L232">UnconfirmedTxs</a></h2>
+<h2 id="unconfirmedtxs"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L242">UnconfirmedTxs</a></h2>
 
 <p>Get unconfirmed transactions (maximum ?limit entries) including their number.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/unconfirmed_txs'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/unconfirmed_txs'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">result</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">UnconfirmedTxs</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1450,14 +1450,14 @@ list of transactions (maximum ?per_page entries) and the total count.</p>
 </span><span class="err">|-----------+------+---------+----------+--------------------------------------|</span><span class="w">
 </span><span class="err">|</span><span class="w"> </span><span class="err">limit</span><span class="w">     </span><span class="err">|</span><span class="w"> </span><span class="err">int</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="mi">30</span><span class="w">      </span><span class="err">|</span><span class="w"> </span><span class="kc">false</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">Maximum</span><span class="w"> </span><span class="err">number</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">entries</span><span class="w"> </span><span class="err">(max</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="err">)</span><span class="w"> </span><span class="err">|</span><span class="w">
 </span></code></pre>
-<h2 id="unsafedialpeers"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L65">UnsafeDialPeers</a></h2>
+<h2 id="unsafedialpeers"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L75">UnsafeDialPeers</a></h2>
 
-<h2 id="unsafedialseeds"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1279:1348#L52">UnsafeDialSeeds</a></h2>
+<h2 id="unsafedialseeds"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1279:1348#L62">UnsafeDialSeeds</a></h2>
 
-<h2 id="unsubscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=4164:4258#L129">Unsubscribe</a></h2>
+<h2 id="unsubscribe"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=4191:4285#L139">Unsubscribe</a></h2>
 
 <p>Unsubscribe from events via WebSocket.</p>
-<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Unsubscribe</span><span class="p">(</span><span class="s">"test-client"</span><span class="p">,</span><span class="x"> </span><span class="n">query</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1495,10 +1495,10 @@ list of transactions (maximum ?per_page entries) and the total count.</p>
 
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="unsubscribeall"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=5010:5093#L162">UnsubscribeAll</a></h2>
+<h2 id="unsubscribeall"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=5037:5120#L172">UnsubscribeAll</a></h2>
 
 <p>Unsubscribe from all events via WebSocket.</p>
-<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">UnsubscribeAll</span><span class="p">(</span><span class="s">"test-client"</span><span class="p">)</span><span class="x">
 </span></code></pre>
 <blockquote>
@@ -1516,12 +1516,12 @@ list of transactions (maximum ?per_page entries) and the total count.</p>
 </span></code></pre>
 <aside class="notice">WebSocket only</aside>
 
-<h2 id="validators"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1045:1112#L36">Validators</a></h2>
+<h2 id="validators"><a href="https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1045:1112#L46">Validators</a></h2>
 
 <p>Get the validator set at the given block height.
 If no height is provided, it will fetch the current validator set.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:46657/validators'</span>
-</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:46657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'localhost:26657/validators'</span>
+</code></pre><pre class="highlight go tab-go"><code><span class="n">client</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewHTTP</span><span class="p">(</span><span class="s">"tcp://0.0.0.0:26657"</span><span class="p">,</span><span class="x"> </span><span class="s">"/websocket"</span><span class="p">)</span><span class="x">
 </span><span class="n">state</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">Validators</span><span class="p">()</span><span class="x">
 </span></code></pre>
 <p>The above command returns JSON structured like this:</p>
