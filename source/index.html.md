@@ -24,7 +24,7 @@ Tendermint RPC is built using [our own RPC library](<a href="https://github.com/
 
 ## Configuration
 
-Set the `laddr` config parameter under `[rpc]` table in the `$TMHOME/config/config.toml` file or the `--rpc.laddr` command-line flag to the desired protocol://host:port setting.  Default: `tcp://0.0.0.0:46657`.
+Set the `laddr` config parameter under `[rpc]` table in the `$TMHOME/config/config.toml` file or the `--rpc.laddr` command-line flag to the desired protocol://host:port setting.  Default: `tcp://0.0.0.0:26657`.
 
 ## Arguments
 
@@ -33,7 +33,7 @@ Arguments which expect strings or byte arrays may be passed as quoted strings, l
 ## URI/HTTP
 
 ```bash
-curl 'localhost:46657/broadcast_tx_sync?tx="abc"'
+curl 'localhost:26657/broadcast_tx_sync?tx="abc"'
 ```
 
 > Response:
@@ -59,7 +59,7 @@ The first entry in the result-array (`96`) is the method this response correlate
 
 ## JSONRPC/HTTP
 
-JSONRPC requests can be POST'd to the root RPC endpoint via HTTP (e.g. `<a href="http://localhost:46657/">http://localhost:46657/</a>`).
+JSONRPC requests can be POST'd to the root RPC endpoint via HTTP (e.g. `<a href="http://localhost:26657/">http://localhost:26657/</a>`).
 
 ```json
 {
@@ -75,7 +75,7 @@ JSONRPC requests can be POST'd to the root RPC endpoint via HTTP (e.g. `<a href=
 
 ## JSONRPC/websockets
 
-JSONRPC requests can be made via websocket. The websocket endpoint is at `/websocket`, e.g. `localhost:46657/websocket`.  Asynchronous RPC functions like event `subscribe` and `unsubscribe` are only available via websockets.
+JSONRPC requests can be made via websocket. The websocket endpoint is at `/websocket`, e.g. `localhost:26657/websocket`.  Asynchronous RPC functions like event `subscribe` and `unsubscribe` are only available via websockets.
 
 ## More Examples
 
@@ -86,7 +86,7 @@ See the various bash tests using curl in `test/`, and examples using the `Go` AP
 An HTTP Get request to the root RPC endpoint shows a list of available endpoints.
 
 ```bash
-curl 'localhost:46657'
+curl 'localhost:26657'
 ```
 
 > Response:
@@ -127,15 +127,15 @@ Endpoints that require arguments:
 
 
 
-## [ABCIInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2427:2474#L79)
+## [ABCIInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=2427:2474#L89)
 Get some info about the application.
 
 ```shell
-curl 'localhost:46657/abci_info'
+curl 'localhost:26657/abci_info'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.ABCIInfo()
 ```
 
@@ -157,15 +157,15 @@ info, err := client.ABCIInfo()
 }
 ```
 
-## [ABCIQuery](https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1581:1688#L40)
+## [ABCIQuery](https://github.com/tendermint/tendermint/tree/master/rpc/core/abci.go?s=1581:1688#L50)
 Query the application for some information.
 
 ```shell
-curl 'localhost:46657/abci_query?path=""&data="abcd"&trusted=false'
+curl 'localhost:26657/abci_query?path=""&data="abcd"&trusted=false'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.ABCIQuery("", "abcd", true)
 ```
 
@@ -202,16 +202,16 @@ result, err := client.ABCIQuery("", "abcd", true)
 | height    | int64 | 0       | false    | Height (0 means latest)                        |
 | trusted   | bool   | false   | false    | Does not include a proof of the data inclusion |
 
-## [Block](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5535:5592#L186)
+## [Block](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=5535:5592#L196)
 Get block at a given height.
 If no height is provided, it will fetch the latest block.
 
 ```shell
-curl 'localhost:46657/block?height=10'
+curl 'localhost:26657/block?height=10'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.Block(10)
 ```
 
@@ -307,7 +307,7 @@ info, err := client.Block(10)
 }
 ```
 
-## [BlockResults](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=9260:9331#L322)
+## [BlockResults](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=9260:9331#L332)
 BlockResults gets ABCIResults at a given height.
 If no height is provided, it will fetch results for the latest block.
 
@@ -315,11 +315,11 @@ Results are for the height of the block containing the txs.
 Thus response.results[5] is the results of executing getBlock(h).Txs[5]
 
 ```shell
-curl 'localhost:46657/block_results?height=10'
+curl 'localhost:26657/block_results?height=10'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.BlockResults(10)
 ```
 
@@ -344,16 +344,16 @@ info, err := client.BlockResults(10)
 }
 ```
 
-## [BlockchainInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1625:1710#L56)
+## [BlockchainInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=1625:1710#L66)
 Get block headers for minHeight <= height <= maxHeight.
 Block headers are returned in descending order (highest first).
 
 ```shell
-curl 'localhost:46657/blockchain?minHeight=10&maxHeight=10'
+curl 'localhost:26657/blockchain?minHeight=10&maxHeight=10'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.BlockchainInfo(10, 10)
 ```
 
@@ -403,15 +403,15 @@ info, err := client.BlockchainInfo(10, 10)
 
 <aside class="notice">Returns at most 20 items.</aside>
 
-## [BroadcastTxAsync](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1177:1246#L41)
+## [BroadcastTxAsync](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=1177:1246#L51)
 Returns right away, with no response
 
 ```shell
-curl 'localhost:46657/broadcast_tx_async?tx="123"'
+curl 'localhost:26657/broadcast_tx_async?tx="123"'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.BroadcastTxAsync("123")
 ```
 
@@ -440,18 +440,18 @@ result, err := client.BroadcastTxAsync("123")
 |-----------+------+---------+----------+-----------------|
 | tx        | Tx   | nil     | true     | The transaction |
 
-## [BroadcastTxCommit](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3679:3755#L142)
+## [BroadcastTxCommit](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=3679:3755#L152)
 CONTRACT: only returns error if mempool.BroadcastTx errs (ie. problem with the app)
 or if we timeout waiting for tx to commit.
 If CheckTx or DeliverTx fail, no error will be returned, but the returned result
 will contain a non-OK ABCI code.
 
 ```shell
-curl 'localhost:46657/broadcast_tx_commit?tx="789"'
+curl 'localhost:26657/broadcast_tx_commit?tx="789"'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.BroadcastTxCommit("789")
 ```
 
@@ -488,15 +488,15 @@ result, err := client.BroadcastTxCommit("789")
 |-----------+------+---------+----------+-----------------|
 | tx        | Tx   | nil     | true     | The transaction |
 
-## [BroadcastTxSync](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2170:2238#L81)
+## [BroadcastTxSync](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=2170:2238#L91)
 Returns with the response from CheckTx.
 
 ```shell
-curl 'localhost:46657/broadcast_tx_sync?tx="456"'
+curl 'localhost:26657/broadcast_tx_sync?tx="456"'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.BroadcastTxSync("456")
 ```
 
@@ -525,16 +525,16 @@ result, err := client.BroadcastTxSync("456")
 |-----------+------+---------+----------+-----------------|
 | tx        | Tx   | nil     | true     | The transaction |
 
-## [Commit](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7921:7980#L268)
+## [Commit](https://github.com/tendermint/tendermint/tree/master/rpc/core/blocks.go?s=7921:7980#L278)
 Get block commit at a given height.
 If no height is provided, it will fetch the commit for the latest block.
 
 ```shell
-curl 'localhost:46657/commit?height=11'
+curl 'localhost:26657/commit?height=11'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.Commit(11)
 ```
 
@@ -600,16 +600,16 @@ info, err := client.Commit(11)
 }
 ```
 
-## [ConsensusState](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=7002:7061#L247)
+## [ConsensusState](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=7002:7061#L257)
 ConsensusState returns a concise summary of the consensus state.
 UNSTABLE
 
 ```shell
-curl 'localhost:46657/consensus_state'
+curl 'localhost:26657/consensus_state'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 state, err := client.ConsensusState()
 ```
 
@@ -647,16 +647,16 @@ The above command returns JSON structured like this:
 }
 ```
 
-## [DumpConsensusState](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=5259:5326#L180)
+## [DumpConsensusState](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=5259:5326#L190)
 DumpConsensusState dumps consensus state.
 UNSTABLE
 
 ```shell
-curl 'localhost:46657/dump_consensus_state'
+curl 'localhost:26657/dump_consensus_state'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 state, err := client.DumpConsensusState()
 ```
 
@@ -746,7 +746,7 @@ The above command returns JSON structured like this:
 	  },
 	  "peers": [
 	    {
-	      "node_address": "30ad1854af22506383c3f0e57fb3c7f90984c5e8@172.16.63.221:46656",
+	      "node_address": "30ad1854af22506383c3f0e57fb3c7f90984c5e8@172.16.63.221:26656",
 	      "peer_state": {
 	        "round_state": {
 	          "height": 7185,
@@ -782,15 +782,15 @@ The above command returns JSON structured like this:
 }
 ```
 
-## [Genesis](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=3065:3110#L115)
+## [Genesis](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=3065:3110#L125)
 Get genesis file.
 
 ```shell
-curl 'localhost:46657/genesis'
+curl 'localhost:26657/genesis'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 genesis, err := client.Genesis()
 ```
 
@@ -824,16 +824,16 @@ genesis, err := client.Genesis()
 }
 ```
 
-## [Health](https://github.com/tendermint/tendermint/tree/master/rpc/core/health.go?s=519:562#L19)
+## [Health](https://github.com/tendermint/tendermint/tree/master/rpc/core/health.go?s=519:562#L29)
 Get node health. Returns empty result (200 OK) on success, no response - in
 case of an error.
 
 ```shell
-curl 'localhost:46657/health'
+curl 'localhost:26657/health'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.Health()
 ```
 
@@ -851,15 +851,15 @@ result, err := client.Health()
 }
 ```
 
-## [NetInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=594:639#L27)
+## [NetInfo](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=594:639#L37)
 Get network info.
 
 ```shell
-curl 'localhost:46657/net_info'
+curl 'localhost:26657/net_info'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 info, err := client.NetInfo()
 ```
 
@@ -874,7 +874,7 @@ info, err := client.NetInfo()
 		"n_peers": 0,
 		"peers": [],
 		"listeners": [
-			"Listener(@10.0.2.15:46656)"
+			"Listener(@10.0.2.15:26656)"
 		],
 		"listening": true
 	},
@@ -884,15 +884,15 @@ info, err := client.NetInfo()
 }
 ```
 
-## [NumUnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L264)
+## [NumUnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=7165:7227#L274)
 Get number of unconfirmed transactions.
 
 ```shell
-curl 'localhost:46657/num_unconfirmed_txs'
+curl 'localhost:26657/num_unconfirmed_txs'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.UnconfirmedTxs()
 ```
 
@@ -913,16 +913,16 @@ result, err := client.UnconfirmedTxs()
 }
 ```
 
-## [Status](https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1719:1762#L56)
+## [Status](https://github.com/tendermint/tendermint/tree/master/rpc/core/status.go?s=1719:1762#L66)
 Get Tendermint status including node info, pubkey, latest block
 hash, app hash, block height and time.
 
 ```shell
-curl 'localhost:46657/status'
+curl 'localhost:26657/status'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.Status()
 ```
 
@@ -937,7 +937,7 @@ result, err := client.Status()
 	"result": {
 	  "node_info": {
 	    "id": "562dd7f579f0ecee8c94a11a3c1e378c1876f433",
-	    "listen_addr": "192.168.1.2:46656",
+	    "listen_addr": "192.168.1.2:26656",
 	    "network": "test-chain-I6zScH",
 	    "version": "0.19.0",
 	    "channels": "4020212223303800",
@@ -948,7 +948,7 @@ result, err := client.Status()
 	      "consensus_version=v1/0.2.2",
 	      "rpc_version=0.7.0/3",
 	      "tx_index=on",
-	      "rpc_addr=tcp://0.0.0.0:46657"
+	      "rpc_addr=tcp://0.0.0.0:26657"
 	    ]
 	  },
 	  "sync_info": {
@@ -971,7 +971,7 @@ result, err := client.Status()
 }
 ```
 
-## [Subscribe](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2772:2862#L77)
+## [Subscribe](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=2799:2889#L87)
 Subscribe for events via WebSocket.
 
 To tell which events you want, you need to provide a query. query is a
@@ -1010,13 +1010,13 @@ See list of all possible events here
 <a href="https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants">https://godoc.org/github.com/tendermint/tendermint/types#pkg-constants</a>
 
 For complete query syntax, check out
-<a href="https://godoc.org/github.com/tendermint/tmlibs/pubsub/query">https://godoc.org/github.com/tendermint/tmlibs/pubsub/query</a>.
+<a href="https://godoc.org/github.com/tendermint/tendermint/libs/pubsub/query">https://godoc.org/github.com/tendermint/tendermint/libs/pubsub/query</a>.
 
 ```go
-import "github.com/tendermint/tmlibs/pubsub/query"
+import "github.com/tendermint/tendermint/libs/pubsub/query"
 import "github.com/tendermint/tendermint/types"
 
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 ctx, cancel := context.WithTimeout(context.Background(), timeout)
 defer cancel()
 query := query.MustParse("tm.event = 'Tx' AND tx.height = 3")
@@ -1055,17 +1055,17 @@ go func() {
 
 <aside class="notice">WebSocket only</aside>
 
-## [Tx](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2094:2152#L63)
+## [Tx](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=2104:2162#L74)
 Tx allows you to query the transaction results. `nil` could mean the
 transaction is in the mempool, invalidated, or was not sent in the first
 place.
 
 ```shell
-curl "localhost:46657/tx?hash=0x2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"
+curl "localhost:26657/tx?hash=0x2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 tx, err := client.Tx([]byte("2B8EC32BA2579B3B8606E42C06DE2F7AFA2556EF"), true)
 ```
 
@@ -1171,16 +1171,16 @@ ID | The ID of the kitten to delete
 - `height`: `int` - height of the block where this transaction was in
 - `hash`: `[]byte` - hash of the transaction
 
-## [TxSearch](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5148:5238#L164)
+## [TxSearch](https://github.com/tendermint/tendermint/tree/master/rpc/core/tx.go?s=5158:5248#L175)
 TxSearch allows you to query for multiple transactions results. It returns a
 list of transactions (maximum ?per_page entries) and the total count.
 
 ```shell
-curl "localhost:46657/tx_search?query=\"account.owner='Ivan'\"&prove=true"
+curl "localhost:26657/tx_search?query=\"account.owner='Ivan'\"&prove=true"
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 q, err := tmquery.New("account.owner='Ivan'")
 tx, err := client.TxSearch(q, true)
 ```
@@ -1242,15 +1242,15 @@ tx, err := client.TxSearch(q, true)
 - `height`: `int` - height of the block where this transaction was in
 - `hash`: `[]byte` - hash of the transaction
 
-## [UnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L232)
+## [UnconfirmedTxs](https://github.com/tendermint/tendermint/tree/master/rpc/core/mempool.go?s=6497:6565#L242)
 Get unconfirmed transactions (maximum ?limit entries) including their number.
 
 ```shell
-curl 'localhost:46657/unconfirmed_txs'
+curl 'localhost:26657/unconfirmed_txs'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 result, err := client.UnconfirmedTxs()
 ```
 
@@ -1277,13 +1277,13 @@ result, err := client.UnconfirmedTxs()
 | limit     | int  | 30      | false    | Maximum number of entries (max: 100) |
 ```
 
-## [UnsafeDialPeers](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L65)
-## [UnsafeDialSeeds](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1279:1348#L52)
-## [Unsubscribe](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=4164:4258#L129)
+## [UnsafeDialPeers](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1782:1868#L75)
+## [UnsafeDialSeeds](https://github.com/tendermint/tendermint/tree/master/rpc/core/net.go?s=1279:1348#L62)
+## [Unsubscribe](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=4191:4285#L139)
 Unsubscribe from events via WebSocket.
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 err := client.Unsubscribe("test-client", query)
 ```
 
@@ -1309,11 +1309,11 @@ err := client.Unsubscribe("test-client", query)
 
 <aside class="notice">WebSocket only</aside>
 
-## [UnsubscribeAll](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=5010:5093#L162)
+## [UnsubscribeAll](https://github.com/tendermint/tendermint/tree/master/rpc/core/events.go?s=5037:5120#L172)
 Unsubscribe from all events via WebSocket.
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 err := client.UnsubscribeAll("test-client")
 ```
 
@@ -1333,16 +1333,16 @@ err := client.UnsubscribeAll("test-client")
 
 <aside class="notice">WebSocket only</aside>
 
-## [Validators](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1045:1112#L36)
+## [Validators](https://github.com/tendermint/tendermint/tree/master/rpc/core/consensus.go?s=1045:1112#L46)
 Get the validator set at the given block height.
 If no height is provided, it will fetch the current validator set.
 
 ```shell
-curl 'localhost:46657/validators'
+curl 'localhost:26657/validators'
 ```
 
 ```go
-client := client.NewHTTP("tcp://0.0.0.0:46657", "/websocket")
+client := client.NewHTTP("tcp://0.0.0.0:26657", "/websocket")
 state, err := client.Validators()
 ```
 
